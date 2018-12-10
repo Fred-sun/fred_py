@@ -1,0 +1,37 @@
+root@TestVM:/home/azureuser# ansible-playbook main.yml --extra-vars "{\"test\":\"test.yml\",\"resource_group\":\"ansible-aks-test\"}" 
+ [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+
+
+PLAY [localhost] ***********************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************
+ok: [localhost]
+
+TASK [create resource group] ***********************************************************************
+changed: [localhost]
+
+TASK [include_tasks] *******************************************************************************
+included: /home/azureuser/test.yml for localhost
+
+TASK [Create an AKS instance (check mode)] *********************************************************
+ [WARNING]: Azure API profile latest does not define an entry for ContainerServiceClient
+
+changed: [localhost]
+
+TASK [Check there is no AKS created] ***************************************************************
+ok: [localhost]
+
+TASK [Check there is no AKS created] ***************************************************************
+ok: [localhost] => {
+    "changed": false, 
+    "msg": "All assertions passed"
+}
+
+TASK [Create an AKS instance] **********************************************************************
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: AttributeError: 'ManagedClustersOperations' object has no attribute 'get_access_profiles'
+fatal: [localhost]: FAILED! => {"changed": false, "module_stderr": "Traceback (most recent call last):\n  File \"/root/.ansible/tmp/ansible-tmp-1544413363.26-45672396010078/AnsiballZ_azure_rm_aks.py\", line 113, in <module>\n    _ansiballz_main()\n  File \"/root/.ansible/tmp/ansible-tmp-1544413363.26-45672396010078/AnsiballZ_azure_rm_aks.py\", line 105, in _ansiballz_main\n    invoke_module(zipped_mod, temp_path, ANSIBALLZ_PARAMS)\n  File \"/root/.ansible/tmp/ansible-tmp-1544413363.26-45672396010078/AnsiballZ_azure_rm_aks.py\", line 48, in invoke_module\n    imp.load_module('__main__', mod, module, MOD_DESC)\n  File \"/tmp/ansible_azure_rm_aks_payload_PPwCZ8/__main__.py\", line 611, in <module>\n  File \"/tmp/ansible_azure_rm_aks_payload_PPwCZ8/__main__.py\", line 607, in main\n  File \"/tmp/ansible_azure_rm_aks_payload_PPwCZ8/__main__.py\", line 400, in __init__\n  File \"/tmp/ansible_azure_rm_aks_payload_PPwCZ8/ansible_azure_rm_aks_payload.zip/ansible/module_utils/azure_rm_common.py\", line 310, in __init__\n  File \"/tmp/ansible_azure_rm_aks_payload_PPwCZ8/__main__.py\", line 496, in exec_module\n  File \"/tmp/ansible_azure_rm_aks_payload_PPwCZ8/__main__.py\", line 552, in create_update_aks\n  File \"/tmp/ansible_azure_rm_aks_payload_PPwCZ8/__main__.py\", line 600, in get_aks_kubeconfig\nAttributeError: 'ManagedClustersOperations' object has no attribute 'get_access_profiles'\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+	to retry, use: --limit @/home/azureuser/main.retry
+
+PLAY RECAP *****************************************************************************************
+localhost                  : ok=6    changed=2    unreachable=0    failed=1    skipped=0 
