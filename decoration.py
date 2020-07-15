@@ -12,12 +12,12 @@ def show01():
 
 @foo
 def show02(name,age):
-    print(f"My name is {name}, age is {age}")
+#    print(f"My name is {name}, age is {age}")
     print('*'*30)
 @foo
 def show03(name,age=18):
     print(f"The funciotn is show -----003")
-    print(f"My name is {name}, age is {age}")
+#    print(f"My name is {name}, age is {age}")
     print('*'*30)
 
 show01()

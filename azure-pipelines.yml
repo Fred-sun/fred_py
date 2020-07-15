@@ -33,10 +33,10 @@ steps:
 - script: python decoration.py
   displayName: 'Run Python script'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+#- script: |
+#    pip install pytest pytest-azurepipelines
+#    pytest
+#  displayName: 'pytest'
 
 - task: PythonScript@0
   inputs:
