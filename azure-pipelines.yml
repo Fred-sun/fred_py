@@ -30,7 +30,17 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
+- script: python decoration.py
+  displayName: 'Run Python script'
+
 - script: |
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'inline'
+    script: |
+      print('Hello world 1')
+      print('Hello world 2')
