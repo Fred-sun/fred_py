@@ -2,11 +2,11 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 
-from_addr = argv[1]
-password = argv[2]
-print(argv)
-print(argv[1])
-print(argv[2])
+from_addr = sys.argv[1]
+password = sys.argv[2]
+print(sys.argv)
+print(sys.argv[1])
+print(sys.argv[2])
 to_addr = ['v-xisu@microsoft.com', 'xiuxi.sun@qq.com']
     
 smtp_server = 'smtp.qq.com'
