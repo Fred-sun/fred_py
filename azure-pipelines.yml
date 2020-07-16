@@ -59,9 +59,9 @@ jobs:
          echo 'PASS'
          echo 'test ****'
          echo 'PASS'
- - job: C
-   dependsOn:
-     - A
-     - B
-   steps:
-     - script: sendmail.py $(USERNAME) $(PASSWORD)
+  - job: C
+    dependsOn:
+      - A
+      - B
+    steps:
+      - script: sendmail.py $(USERNAME) $(PASSWORD)
