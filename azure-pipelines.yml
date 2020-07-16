@@ -62,7 +62,7 @@ jobs:
          echo 'PASS'
   - job: C
     dependsOn:
-      - A
       - B
+    conditin: fail()
     steps:
       - script: python3 sendmail.py $(USERNAME) $(PASSWORD)
