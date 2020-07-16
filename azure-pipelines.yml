@@ -58,4 +58,7 @@ jobs:
       - B
     condition: failed()
     steps:
-      - script: python3 sendmail.py $(USERNAME) $(PASSWORD)
+      #- script: python3 sendmail.py $(USERNAME) $(PASSWORD)
+      - script: |
+        print('Hello world 1')
+        print('Hello world 2')
