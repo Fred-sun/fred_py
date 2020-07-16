@@ -3,6 +3,13 @@
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
+schedules:
+- cron: "*/3 * * * *"
+  displayName: "Execute cron tasks"
+  branches:
+    - master
+  always: true
+
 trigger:
 - master
 
@@ -19,28 +26,42 @@ strategy:
     Python37:
       python.version: '3.7'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+jobs:
+  - job: A
+    steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '$(python.version)'
+        displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+      - script: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        displayName: 'Install dependencies'
 
-- script: python decoration.py
-  displayName: 'Run Python script'
+      - script: python decoration.py
+        displayName: 'Run Python script'
 
-#- script: |
-#    pip install pytest pytest-azurepipelines
-#    pytest
-#  displayName: 'pytest'
+      #- script: |
+      #    pip install pytest pytest-azurepipelines
+      #    pytest
+      #  displayName: 'pytest'
 
-- task: PythonScript@0
-  inputs:
-    scriptSource: 'inline'
-    script: |
-      print('Hello world 1')
-      print('Hello world 2')
+      - task: PythonScript@0
+        inputs:
+          scriptSource: 'inline'
+          script: |
+            print('Hello world 1')
+            print('Hello world 2')
+  - job: B
+    dependsOn:
+      - A
+      - B
+    steps:
+      - script: |
+         echo 'PASS'
+         echo 'test ****'
+         echo 'PASS'
+ - job: C
+   steps:
+     - script: sendmail.py $(USERNAME) $(PASSWORD)
