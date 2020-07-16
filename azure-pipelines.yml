@@ -7,7 +7,8 @@ schedules:
 - cron: "*/3 * * * *"
   displayName: "Execute cron tasks"
   branches:
-    - master
+    include:
+      - master
   always: true
 
 trigger: none
