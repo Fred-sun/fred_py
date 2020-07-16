@@ -63,6 +63,6 @@ jobs:
   - job: C
     dependsOn:
       - B
-    condition: fail()
+    condition: failed()
     steps:
       - script: python3 sendmail.py $(USERNAME) $(PASSWORD)
