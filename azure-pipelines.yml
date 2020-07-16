@@ -64,4 +64,4 @@ jobs:
       - A
       - B
     steps:
-      - script: python sendmail.py $(USERNAME) $(PASSWORD)
+      - script: python3 sendmail.py $(USERNAME) $(PASSWORD)
