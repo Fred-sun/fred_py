@@ -52,7 +52,6 @@ jobs:
          echo 'PASS'
          echo 'test ****'
          echo 'PASS'
-         cd 123/
   - job: C
     dependsOn:
       - B
