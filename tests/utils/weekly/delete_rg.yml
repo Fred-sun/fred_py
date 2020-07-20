@@ -8,9 +8,6 @@
       azure_rm_resourcegroup_info:
       register: output
 
-    - debug:
-        var: output
-
     - name: delete named startwith ansibletest
       azure_rm_resourcegroup:
         name: "{{ item }}"
