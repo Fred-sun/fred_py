@@ -19,7 +19,6 @@ pip3 install ansible=="2.9.0" --disable-pip-version-check
 ansible-galaxy collection install azure.azcollection
 
 TEST_DIR="${HOME}/.ansible/collections/ansible_collections/azure/azcollection"
-# mkdir -p "${TEST_DIR}"
 
 pip3 install  -I -r "${TEST_DIR}/requirements-azure.txt"
 

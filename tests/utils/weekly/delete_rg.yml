@@ -21,13 +21,6 @@
       poll: 0
       register: jobs
 
-      #- name: Wait for complete
-      # async_status: jid={{ item.ansible_job_id }}
-      # register: job
-      # until: job.finished
-      #retries: 300
-      #with_items: "{{ jobs.results }}"
-
     - name: delete named start with sampletest
       azure_rm_resourcegroup:
         name: "{{ item }}"
@@ -37,10 +30,3 @@
       async: 10000
       poll: 0
       register: jobs
-
-      #- name: Wait for complete
-      #async_status: jid={{ item.ansible_job_id }}
-      #register: job
-      #until: job.finished
-      #retries: 300
-      #with_items: "{{ jobs.results }}"
