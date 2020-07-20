@@ -21,7 +21,7 @@ jobs:
           versionSpec: '$(python.version)'
         displayName: 'Use Python $(python.version)'
 
-      - script: ado.sh
+      - script: ./ado.sh
         displayName: 'Install ansible and excute ansible'
         env:
           SHIPPABLE_BUILD_DIR: $(Build.Repository.LocalPath)
