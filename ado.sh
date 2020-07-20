@@ -17,7 +17,7 @@ export LC_ALL="en_US.utf-8"
 
 pip3 install virtualenv
 ls /usr/bin/
-ls /usr/bin/python3/
+#ls /usr/bin/python3/
 ls /usr/bin/python3.6/
 virtualenv --python /usr/bin/python3.6/ansible-venv
 
