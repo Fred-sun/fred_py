@@ -32,6 +32,5 @@ jobs:
   - job: B
     steps:
       - bash: |
-         echo 'PASS'
-         echo 'test ****'
-         echo 'PASS'
+         echo 'TEST PASS'
+         echo 'TEST PASS'
