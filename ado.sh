@@ -5,7 +5,6 @@ set -o pipefail -eux
 declare -a args
 
 command -v python
-python -V
 
 command -v pip3
 pip3 --version
