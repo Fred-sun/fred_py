@@ -1,0 +1,69 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+schedules:
+- cron: "*/3 * * * *"
+  displayName: "Execute cron tasks"
+  branches:
+    include:
+      - master
+  always: true
+
+trigger: 
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+  - job: A
+    strategy:
+      matrix:
+        Python27:
+          python.version: '2.7'
+        Python35:
+          python.version: '3.5'
+        Python36:
+          python.version: '3.6'
+        Python37:
+          python.version: '3.7'
+    steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '$(python.version)'
+        displayName: 'Use Python $(python.version)'
+
+      - script: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        displayName: 'Install dependencies'
+
+      - script: python decoration.py
+        displayName: 'Run Python script'
+
+      #- script: |
+      #    pip install pytest pytest-azurepipelines
+      #    pytest
+      #  displayName: 'pytest'
+
+      - task: PythonScript@0
+        inputs:
+          scriptSource: 'inline'
+          script: |
+            print('Hello world 1')
+            print('Hello world 2')
+  - job: B
+    steps:
+      - bash: |
+         echo 'PASS'
+         echo 'test ****'
+         echo 'PASS'
+         cd 123/
+  - job: C
+    dependsOn:
+      - B
+    condition: failed()
+    steps:
+      - script: python3 sendmail.py $(USERNAME) $(PASSWORD)

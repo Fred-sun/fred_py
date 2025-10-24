@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  connection: local
+  collections:
+    - azure.azcollection
+  tasks:
+    - name: query
+      azure_rm_resourcegroup_info:
+      register: output
+
+    - name: delete named startwith ansibletest
+      azure_rm_resourcegroup:
+        name: "{{ item }}"
+        state: absent
+        force: yes
+      with_items: "{{ output | json_query('resourcegroups[*].name') | select('match', 'ansibletest') | list }}"
+      async: 10000
+      poll: 0
+      register: jobs
+
+    - name: delete named start with sampletest
+      azure_rm_resourcegroup:
+        name: "{{ item }}"
+        state: absent
+        force: yes
+      with_items: "{{ output | json_query('resourcegroups[*].name') | select('match', 'sampletest') | list }}"
+      async: 10000
+      poll: 0
+      register: jobs
